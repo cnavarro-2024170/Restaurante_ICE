@@ -69,7 +69,7 @@ public class AuthService(
         }
 
         // Crear nuevo usuario y entidades relacionadas
-        var emailVerificationToken = TokenGenerator.GenerateEmailVerificationToken();
+        var emailVerificationToken = TokenGeneratorService.GenerateEmailVerificationToken();
 
         var userId = UuidGenerator.GenerateUserId();
         var userProfileId = UuidGenerator.GenerateUserId();
@@ -97,7 +97,6 @@ public class AuthService(
             {
                 Id = userProfileId,
                 UserId = userId,
-                ProfilePicture = profilePicturePath,
                 Phone = registerDto.Phone
             },
             UserEmail = new UserEmail
@@ -219,7 +218,6 @@ public class AuthService(
             Surname = user.Surname,
             Username = user.Username,
             Email = user.Email,
-            ProfilePicture = _cloudinaryService.GetFullImageUrl(user.UserProfile?.ProfilePicture ?? string.Empty),
             Phone = user.UserProfile?.Phone ?? string.Empty,
             Role = userRole,
             Status = user.Status,
@@ -235,7 +233,6 @@ public class AuthService(
         {
             Id = user.Id,
             Username = user.Username,
-            ProfilePicture = _cloudinaryService.GetFullImageUrl(user.UserProfile?.ProfilePicture ?? string.Empty),
             Role = user.UserRoles.FirstOrDefault()?.Role?.Name ?? RoleConstants.USER_ROLE
         };
     }
@@ -307,7 +304,7 @@ public class AuthService(
         }
 
         // Generar nuevo token
-        var newToken = TokenGenerator.GenerateEmailVerificationToken();
+        var newToken = TokenGeneratorService.GenerateEmailVerificationToken();
         user.UserEmail.EmailVerificationToken = newToken;
         user.UserEmail.EmailVerificationTokenExpiry = DateTime.UtcNow.AddHours(24);
 
@@ -351,7 +348,7 @@ public class AuthService(
         }
 
         // Generar token de reset
-        var resetToken = TokenGenerator.GeneratePasswordResetToken();
+        var resetToken = TokenGeneratorService.GeneratePasswordResetToken();
 
         if (user.UserPasswordReset == null)
         {

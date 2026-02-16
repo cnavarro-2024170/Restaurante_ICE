@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AuthService.Persistence.Data;
 
-public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : DbContext(options)
+public class ApplicationDb(DbContextOptions<ApplicationDb> options) : DbContext(options)
 {
     public DbSet<User> Users {get; set;}
     public DbSet<Role> Roles {get; set;}
@@ -108,7 +108,6 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
                 .ValueGeneratedOnAdd();
             entity.Property(e => e.UserId)
                 .HasMaxLength(16);
-            entity.Property(e => e.ProfilePicture).HasDefaultValue("");
             entity.Property(e => e.Phone).HasMaxLength(8);
         });
 
@@ -139,7 +138,7 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
                 .HasMaxLength(16);
             entity.Property(e => e.CreatedAt)
                 .IsRequired();
-            entity.Property(e => e.UpdatedAt)
+            entity.Property(e => e.UpdateAt)
                 .IsRequired();
             entity.HasOne(ur => ur.User)
                 .WithMany(u => u.UserRoles)
@@ -205,7 +204,7 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
                 {
                     userRole.CreatedAt = DateTime.UtcNow;
                 }
-                userRole.UpdatedAt = DateTime.UtcNow;
+                userRole.UpdateAt = DateTime.UtcNow;
             }
         }
     }

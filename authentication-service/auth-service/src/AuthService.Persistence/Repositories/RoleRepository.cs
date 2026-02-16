@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AuthService.Persistence.Repositories;
 
-public class RoleRepository(ApplicationDbContext context) : IRoleRepository
+public class RoleRepository(ApplicationDb context) : IRoleRepository
 {
     public async Task<int> CountUsersInRoleAsync(string roleName)
     {
