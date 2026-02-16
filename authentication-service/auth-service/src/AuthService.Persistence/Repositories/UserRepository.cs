@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AuthService.Persistence.Repositories;
 
-public class UserRepository(ApplicationDbContext context) : IUserRepository
+public class UserRepository(ApplicationDb context) : IUserRepository
 {
     public async Task<User> GetByIdAsync(string id)
     {
@@ -118,7 +118,7 @@ public class UserRepository(ApplicationDbContext context) : IUserRepository
             UserId = userId,
             RoleId = roleId, // Use the existing role ID from the roles table
             CreatedAt = DateTime.UtcNow,
-            UpdatedAt = DateTime.UtcNow
+            UpdateAt = DateTime.UtcNow
         };
         
         context.UserRoles.Add(newUserRole);
