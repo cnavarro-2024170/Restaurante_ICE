@@ -14,6 +14,9 @@ import { errorHandler } from '../middleware/handle-errors.js';
 //import categoryRoutes from '../src/Category/category.routes.js';
 //import productRoutes from '../src/product/product.routes.js';
 import restaurantRoutes from '../src/restaurant/restaurant.routes.js'; 
+import tableRoutes from '../src/table/table.routes.js';
+
+
 
 const BASE_PATH = '/RestauranteICE/v1';
 
@@ -35,6 +38,7 @@ const routes = (app) =>{
     //app.use(`${BASE_PATH}/product`, productRoutes);
     //app.use(`${BASE_PATH}/category`, categoryRoutes);
     app.use(`${BASE_PATH}/restaurant`, restaurantRoutes);
+    app.use(`${BASE_PATH}/table`, tableRoutes);
 
     app.get(`${BASE_PATH}/health`, (req, res) =>{
         res.status(200).json({
