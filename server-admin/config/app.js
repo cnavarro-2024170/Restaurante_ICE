@@ -9,6 +9,7 @@ import { corsOptions } from './cors.configuration.js'
 import { helmetOptions } from './helmet.configuration.js'
 import { requestLimit } from './rateLimit.configuration.js';
 import { errorHandler } from '../middleware/handle-errors.js';
+import eventRoutes from '../src/event/event.routes.js';
 
 // 1. IMPORTA TUS RUTAS AQUÍ:
 import analyticsRoutes from '../src/analytics/analytics.routes.js'; // CORREGIDO AQUÍ
@@ -39,6 +40,7 @@ const routes = (app) =>{
     app.use(`${BASE_PATH}/restaurant`, restaurantRoutes);
     app.use(`${BASE_PATH}/table`, tableRoutes); // Del repo principal
     app.use(`${BASE_PATH}/order`, orderRoutes); // Tu aporte de Orders
+    app.use(`${BASE_PATH}/event`, eventRoutes);
 
     app.get(`${BASE_PATH}/health`, (req, res) =>{
         res.status(200).json({
