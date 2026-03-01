@@ -11,7 +11,7 @@ import {
     fetchPromotions,
     deletePromotion as deletePromotionService,
     restorePromotion as restorePromotionService,
-} from './event.service.js';
+} from './eventService.js';
 
 // ─────────────────────────────────────────────
 // EVENTOS
@@ -39,7 +39,7 @@ export const createEventRecord = async (req, res) => {
 
 export const getEvents = async (req, res) => {
     try {
-        const { page = 1, limit = 10, isActive = true } = req.query;
+        const { page = 1, limit = 10, isActive = 'true' } = req.query;
         const active = isActive === 'true';
 
         const { events, pagination } = await fetchEvents({ page, limit, isActive: active });
@@ -111,7 +111,7 @@ export const createInscriptionRecord = async (req, res) => {
 
 export const getInscriptions = async (req, res) => {
     try {
-        const { page = 1, limit = 10, isActive = true } = req.query;
+        const { page = 1, limit = 10, isActive = 'true' } = req.query;
         const active = isActive === 'true';
 
         const { inscriptions, pagination } = await fetchInscriptions({ page, limit, isActive: active });
@@ -183,7 +183,7 @@ export const createPromotionRecord = async (req, res) => {
 
 export const getPromotions = async (req, res) => {
     try {
-        const { page = 1, limit = 10, isActive = true } = req.query;
+        const { page = 1, limit = 10, isActive = 'true' } = req.query;
         const active = isActive === 'true';
 
         const { promotions, pagination } = await fetchPromotions({ page, limit, isActive: active });

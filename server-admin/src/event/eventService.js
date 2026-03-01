@@ -1,6 +1,6 @@
-import Event from '../models/eventModel.js';
-import Inscription from '../models/inscriptionModel.js';
-import Promotion from '../models/promotionModel.js';
+import Event from '../event/eventModel.js';
+import Inscription from '../event/inscriptionModel.js';
+import Promotion from '../event/promotionModel.js';
 
 // ─────────────────────────────────────────────
 // EVENTOS

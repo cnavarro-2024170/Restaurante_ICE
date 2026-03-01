@@ -12,7 +12,7 @@ import {
     getPromotions,
     deletePromotion,
     restorePromotion,
-} from './event.controller.js';
+} from './eventController.js';
 import { validateCreateEvent } from '../../middleware/event-validator.js';
 import { validateCreateInscription } from '../../middleware/inscription-validator.js';
 import { validateCreatePromotion } from '../../middleware/promotion-validator.js';

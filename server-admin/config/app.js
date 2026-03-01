@@ -9,7 +9,7 @@ import { corsOptions } from './cors.configuration.js'
 import { helmetOptions } from './helmet.configuration.js'
 import { requestLimit } from './rateLimit.configuration.js';
 import { errorHandler } from '../middleware/handle-errors.js';
-import eventRoutes from '../src/event/event.routes.js';
+
 
 // 1. IMPORTA TUS RUTAS AQUÍ:
 import analyticsRoutes from '../src/analytics/analytics.routes.js'; // CORREGIDO AQUÍ
@@ -19,6 +19,7 @@ import analyticsRoutes from '../src/analytics/analytics.routes.js'; // CORREGIDO
 import restaurantRoutes from '../src/restaurant/restaurant.routes.js'; 
 import tableRoutes from '../src/table/table.routes.js'; // Del repo principal
 import orderRoutes from '../src/order/order.routes.js'; // Tu aporte de Orders
+import eventRoutes from '../src/event/eventRoutes.js';
 
 const BASE_PATH = '/RestauranteICE/v1';
 
