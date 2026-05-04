@@ -1,12 +1,29 @@
-import { Navbar } from './Navbar.jsx';
-import { Sidebar } from './Sidebar.jsx';
+import { Outlet, Navigate } from 'react-router-dom';
+import Navbar from './Navbar';
+import Sidebar from './Sidebar';
 
-export const DashboardContainer = ({ children }) => (
-  <div className="min-h-screen flex flex-col" style={{ background: 'linear-gradient(135deg,#fff7ed,#ffffff,#fef2f2)' }}>
-    <Navbar />
-    <div className="flex flex-1">
-      <Sidebar />
-      <main className="flex-1 p-6 overflow-auto">{children}</main>
+const DashboardContainer = () => {
+  const isAuthenticated = true;
+
+  if (!isAuthenticated) {
+    return <Navigate to="/login" replace />;
+  }
+
+  return (
+    <div className="flex flex-col h-screen overflow-hidden">
+      <Navbar />
+      
+      <div className="flex flex-1">
+        <Sidebar />
+        
+        <main className="flex-1 overflow-y-auto bg-bg-light p-8">
+          <div className="max-w-7xl mx-auto">
+            <Outlet />
+          </div>
+        </main>
+      </div>
     </div>
-  </div>
-);
+  );
+};
+
+export default DashboardContainer;
