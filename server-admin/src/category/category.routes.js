@@ -3,9 +3,11 @@ import {
     createCategoryRecord,
     getCategorys, 
     deleteCategory, 
-    restoreCategory 
+    restoreCategory,
+    updateCategory 
 } from "./category.controller.js";
 import { validateCreateCategory } from '../../middleware/category-validator.js'; 
+import { validateJWT } from '../../middleware/validate-JWT.js';
 
 const router = Router();
 
@@ -95,5 +97,7 @@ router.patch('/delete/:id', deleteCategory);
  *         description: No se pudo encontrar la categoría
  */
 router.patch('/restore/:id', restoreCategory);
+
+router.put('/:id', validateJWT, updateCategory);
 
 export default router;

@@ -6,7 +6,10 @@ import { UiConfirmHost } from '../features/auth/components/ConfirmModal.jsx';
 
 export const App = () => {
   const checkAuth = useAuthStore((s) => s.checkAuth);
-  useEffect(() => { checkAuth(); }, [checkAuth]);
+  
+  useEffect(() => { 
+    checkAuth(); 
+  }, [checkAuth]);
 
   return (
     <>

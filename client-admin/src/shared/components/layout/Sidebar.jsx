@@ -8,6 +8,8 @@ const Sidebar = () => {
     { name: 'Restaurantes', path: '/restaurants' },
     { name: 'Menús', path: '/menus' },
     { name: 'Mesas', path: '/tables' },
+    { name: 'Categorías',    path: '/categories' },
+    { name: 'Productos',     path: '/products' },
     { name: 'Reservaciones', path: '/reservations' },
     { name: 'Eventos', path: '/events' },
     { name: 'Estadísticas', path: '/analytics' },

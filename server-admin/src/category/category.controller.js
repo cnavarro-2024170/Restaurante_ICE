@@ -2,7 +2,8 @@ import {
     createCategoryRecord as createCategoryService, 
     fetchCategorys, 
     deleteCategory as deleteCategoryService, 
-    restoreCategory as restoreCategoryService 
+    restoreCategory as restoreCategoryService,
+    updateCategory as updateCategoryService,
 } from './category.service.js';
 
 export const createCategoryRecord = async (req, res) => {
@@ -77,4 +78,15 @@ export const restoreCategory = async (req, res) => {
   } catch (error) {
     res.status(500).json({ success: false, error: error.message });
   }
+};
+
+export const updateCategory = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const category = await updateCategoryService(id, req.body);
+        if (!category) return res.status(404).json({ message: 'Categoría no encontrada' });
+        res.json({ success: true, message: 'Categoría actualizada', data: category });
+    } catch (error) {
+        res.status(500).json({ success: false, error: error.message });
+    }
 };

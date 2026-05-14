@@ -1,4 +1,9 @@
-import { createProductRecord as createProductService, fetchProducts, deleteProduct as deleteProductService, restoreProduct as restoreProductService } from './product.service.js';
+import { 
+    createProductRecord as createProductService, 
+    fetchProducts, deleteProduct as deleteProductService, 
+    restoreProduct as restoreProductService,
+    updateProduct as updateProductService,
+} from './product.service.js';
 
 export const createProductRecord = async (req, res) => {
     try {
@@ -65,5 +70,19 @@ export const restoreProduct = async (req, res) => {
         res.json({ success: true, message: 'Producto restaurado', data: product });
     } catch (err) {
         res.status(500).json({ success: false, message: 'Error al restaurar el producto', error: err.message });
+    }
+};
+
+export const updateProduct = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const product = await updateProductService(id, {
+            productData: req.body,
+            file: req.file
+        });
+        if (!product) return res.status(404).json({ message: 'Producto no encontrado' });
+        res.json({ success: true, message: 'Producto actualizado', data: product });
+    } catch (err) {
+        res.status(500).json({ success: false, message: 'Error al actualizar el producto', error: err.message });
     }
 };

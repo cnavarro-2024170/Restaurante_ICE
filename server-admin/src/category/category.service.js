@@ -45,3 +45,7 @@ export const deleteCategory = async (id) => {
 export const restoreCategory = async (id) => {
     return await Category.findByIdAndUpdate(id, { isActive: true }, { new: true });
 };
+
+export const updateCategory = async (id, data) => {
+    return await Category.findByIdAndUpdate(id, data, { new: true, runValidators: true });
+};

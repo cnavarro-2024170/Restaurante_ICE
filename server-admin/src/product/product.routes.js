@@ -3,14 +3,15 @@ import {
     createProductRecord,
     getProducts,
     deleteProduct,
-    restoreProduct
+    restoreProduct,
+    updateProduct
 } from "./product.controller.js";
 import { validateCreateProduct } from '../../middleware/product-validator.js'; 
+import { validateJWT } from '../../middleware/validate-JWT.js';
 import { uploadMenuImage } from "../../middleware/file-uploader.js"; 
 import { cleanupUploadedFileOnFinish } from '../../middleware/delete-file-on-error.js';
 
 const router = Router();
-
 
 /**
  * @swagger
@@ -66,6 +67,51 @@ router.post(
   cleanupUploadedFileOnFinish,
   validateCreateProduct,
   createProductRecord
+);
+
+/**
+ * @swagger
+ * /product/{id}:
+ *   put:
+ *     summary: Actualizar un producto existente
+ *     tags: [Product]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID del producto a actualizar
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               saucer:
+ *                 type: string
+ *               price:
+ *                 type: number
+ *               description:
+ *                 type: string
+ *               category:
+ *                 type: string
+ *               image:
+ *                 type: string
+ *                 format: binary
+ *     responses:
+ *       200:
+ *         description: Producto actualizado correctamente
+ *       404:
+ *         description: Producto no encontrado
+ */
+router.put(
+  '/:id',
+  validateJWT,
+  uploadMenuImage.single('image'),
+  cleanupUploadedFileOnFinish,
+  updateProduct
 );
 
 /**

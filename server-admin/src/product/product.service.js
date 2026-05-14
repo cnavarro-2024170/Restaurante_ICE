@@ -50,3 +50,13 @@ export const deleteProduct = async (id) => {
 export const restoreProduct = async (id) => {
     return await Product.findByIdAndUpdate(id, { isActive: true }, { new: true });
 };
+
+export const updateProduct = async (id, { productData, file }) => {
+    const data = { ...productData };
+    if (file) {
+        const filename = file.filename;
+        const match = filename.match(/Products\/.+$/);
+        data.photo = match ? match[0] : filename;
+    }
+    return await Product.findByIdAndUpdate(id, data, { new: true, runValidators: true });
+};
