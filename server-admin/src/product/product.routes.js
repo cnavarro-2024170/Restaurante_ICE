@@ -39,7 +39,7 @@ router.get('/', getProducts);
  *           schema:
  *             type: object
  *             properties:
- *               name:
+ *               saucer:
  *                 type: string
  *                 example: "Hamburguesa Clásica"
  *               price:

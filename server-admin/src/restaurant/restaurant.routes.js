@@ -1,5 +1,11 @@
 import { Router } from "express";
-import { createRestaurant, getRestaurants, updateRestaurant, deleteRestaurant } from "./restaurant.controller.js";
+import {
+    createRestaurant,
+    getRestaurants,
+    updateRestaurant,
+    deleteRestaurant
+} from "./restaurant.controller.js";
+
 import { validateCreateRestaurant } from '../../middleware/restaurant-validator.js';
 import { uploadRestaurantImage } from "../../middleware/file-uploader.js";
 import { cleanupUploadedFileOnFinish } from '../../middleware/delete-file-on-error.js';
@@ -42,24 +48,30 @@ router.get('/', getRestaurants);
  *               phone:
  *                 type: string
  *                 example: "5555-5555"
+ *               openingHours:
+ *                 type: string
+ *                 example: "Lunes a Domingo, 8:00 AM - 10:00 PM"
  *               description:
  *                 type: string
  *                 example: "Restaurante especializado en comida internacional"
  *               image:
  *                 type: string
  *                 format: binary
+ *                 description: Imagen del restaurante
  *     responses:
  *       201:
  *         description: Restaurante creado exitosamente
  *       400:
  *         description: Datos inválidos
+ *       500:
+ *         description: Error interno del servidor
  */
 router.post(
-  '/',
-  uploadRestaurantImage.single('image'),
-  cleanupUploadedFileOnFinish,
-  validateCreateRestaurant,
-  createRestaurant
+    '/',
+    uploadRestaurantImage.single('image'),
+    cleanupUploadedFileOnFinish,
+    validateCreateRestaurant,
+    createRestaurant
 );
 
 /**
@@ -91,23 +103,31 @@ router.post(
  *               phone:
  *                 type: string
  *                 example: "4444-4444"
+ *               openingHours:
+ *                 type: string
+ *                 example: "Martes a Domingo, 12:00 PM - 11:00 PM"
  *               description:
  *                 type: string
  *                 example: "Nueva descripción del restaurante"
  *               image:
  *                 type: string
  *                 format: binary
+ *                 description: Nueva imagen del restaurante
  *     responses:
  *       200:
  *         description: Restaurante actualizado correctamente
+ *       400:
+ *         description: Datos inválidos o ID incorrecto
  *       404:
  *         description: Restaurante no encontrado
+ *       500:
+ *         description: Error interno del servidor
  */
 router.put(
-  '/:id',
-  uploadRestaurantImage.single('image'),
-  cleanupUploadedFileOnFinish,
-  updateRestaurant
+    '/:id',
+    uploadRestaurantImage.single('image'),
+    cleanupUploadedFileOnFinish,
+    updateRestaurant
 );
 
 /**
@@ -128,6 +148,8 @@ router.put(
  *         description: Restaurante eliminado con éxito
  *       404:
  *         description: Restaurante no encontrado
+ *       500:
+ *         description: Error interno del servidor
  */
 router.delete('/:id', deleteRestaurant);
 
