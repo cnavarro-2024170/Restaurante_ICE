@@ -4,13 +4,14 @@ const Sidebar = () => {
   const location = useLocation();
 
   const menuItems = [
-    { name: 'Órdenes', path: '/' },
-    { name: 'Restaurantes', path: '/restaurants' },
-    { name: 'Menús', path: '/menus' },
-    { name: 'Mesas', path: '/tables' },
+    { name: 'Órdenes',       path: '/' },
+    { name: 'Restaurantes',  path: '/restaurants' },
+    { name: 'Mesas',         path: '/tables' },
+    { name: 'Categorías',    path: '/categories' },
+    { name: 'Productos',     path: '/products' },
     { name: 'Reservaciones', path: '/reservations' },
-    { name: 'Eventos', path: '/events' },
-    { name: 'Estadísticas', path: '/analytics' },
+    { name: 'Eventos',       path: '/events' },
+    { name: 'Estadísticas',  path: '/analytics' },
   ];
 
   return (
